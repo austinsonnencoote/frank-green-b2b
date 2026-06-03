@@ -964,6 +964,12 @@
       err.textContent = 'Please enter a valid email address.';
       return;
     }
+    var allowed = ['frankgreen.com', 'frankgreen.com.au'];
+    var domain = email.split('@')[1].toLowerCase();
+    if (!allowed.includes(domain)) {
+      err.textContent = 'This guide is only accessible to frank green team members.';
+      return;
+    }
     err.textContent = '';
     localStorage.setItem('fg_b2b_access', email);
     var gate = document.getElementById('gate');
