@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>frank green × Shopify B2B — Setup Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f2f4f2;
+    color: #111;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  a { color: #0a6629; }
+  a:hover { color: #084d1f; }
+
+  /* ─── HEADER ─── */
+  header {
+    background: #0c1a0e;
+    padding: 52px 48px 48px;
+    color: #fff;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #3fd66a;
+    border: 1px solid #1e5e30;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-bottom: 18px;
+  }
+  header h1 {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: #3fd66a; }
+  header p {
+    color: #7fa888;
+    font-size: 15px;
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  /* ─── LAYOUT ─── */
+  .page { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #3fd66a;
+    margin-bottom: 6px;
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: #fff;
+    border: 1px solid #dce5dd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .card-head {
+    padding: 24px 28px 18px;
+    border-bottom: 1px solid #edf1ee;
+  }
+  .card-head h2 {
+    font-size: 19px;
+    font-weight: 800;
+    color: #0c1a0e;
+    margin-bottom: 4px;
+  }
+  .card-head p {
+    font-size: 14px;
+    color: #5a7060;
+    line-height: 1.65;
+  }
+  .card-body {
+    padding: 20px 28px 24px;
+  }
+
+  /* ─── STEPS ─── */
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .step:last-child { margin-bottom: 0; }
+  .step-n {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #3fd66a;
+    color: #0c1a0e;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0c1a0e;
+    margin-bottom: 4px;
+  }
+  .step-content p {
+    font-size: 14px;
+    color: #3d5240;
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+  .step-content ul {
+    padding-left: 18px;
+    margin: 4px 0 6px;
+  }
+  .step-content li {
+    font-size: 14px;
+    color: #3d5240;
+    line-height: 1.85;
+  }
+
+  /* ─── URL BLOCKS ─── */
+  .lbl {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: #8faa94;
+    margin: 8px 0 3px;
+  }
+  .url {
+    background: #f0f5f1;
+    border: 1px solid #c8daca;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
+    font-size: 12.5px;
+    color: #0a5220;
+    word-break: break-all;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  /* ─── CALLOUTS ─── */
+  .note {
+    background: #fffbe6;
+    border-left: 3px solid #e8c830;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #4a3a00;
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .note strong { color: #2a2000; }
+  .tip {
+    background: #eaf5ec;
+    border-left: 3px solid #3fd66a;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #0c3018;
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .tip strong { color: #072010; }
+
+  hr { border: none; border-top: 1px solid #e8ede9; margin: 18px 0; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: #c8daca;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: -24px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #3fd66a;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #3fd66a;
+  }
+  .tl-dot.now { background: #0c1a0e; box-shadow: 0 0 0 2px #0c1a0e; }
+  .tl-dot.launch { background: #0c1a0e; box-shadow: 0 0 0 2px #0c1a0e; }
+  .tl-month {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: #0a6629;
+    margin-bottom: 2px;
+  }
+  .tl-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #0c1a0e;
+    margin-bottom: 6px;
+  }
+  .tl-items {
+    padding-left: 16px;
+    margin: 0;
+  }
+  .tl-items li {
+    font-size: 13.5px;
+    color: #3d5240;
+    line-height: 1.8;
+  }
+  .tl-items li strong { color: #0c1a0e; }
+  .tl-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-backend { background: #dce5dd; color: #1a3a20; }
+  .badge-frontend { background: #0c1a0e; color: #3fd66a; }
+  .badge-launch { background: #3fd66a; color: #0c1a0e; }
+
+  /* ─── PAYMENTS TABLE ─── */
+  .compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 12px;
+  }
+  .compare th {
+    text-align: left;
+    padding: 8px 12px;
+    background: #f0f5f1;
+    border: 1px solid #dce5dd;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #3d5240;
+  }
+  .compare td {
+    padding: 9px 12px;
+    border: 1px solid #e8ede9;
+    vertical-align: top;
+    color: #3d5240;
+    line-height: 1.55;
+  }
+  .compare td:first-child { font-weight: 600; color: #0c1a0e; }
+  .yes { color: #0a6629; font-weight: 700; }
+  .no { color: #b04040; font-weight: 700; }
+
+  /* ─── QUICK REF ─── */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .ref-item {
+    background: #f0f5f1;
+    border: 1px solid #c8daca;
+    border-radius: 7px;
+    padding: 10px 14px;
+  }
+  .ref-item .ref-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0c1a0e;
+    margin-bottom: 3px;
+  }
+  .ref-item a {
+    font-size: 12px;
+    font-family: 'SFMono-Regular', 'Consolas', monospace;
+    word-break: break-all;
+    line-height: 1.4;
+    display: block;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0c1a0e;
+    color: #7fa888;
+    padding: 40px 48px;
+    text-align: center;
+  }
+  footer strong { color: #fff; }
+  footer a { color: #3fd66a; text-decoration: none; }
+  footer p { margin-bottom: 4px; }
+
+  /* ─── EMAIL GATE ─── */
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: #0c1a0e;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    transition: opacity .4s ease;
+  }
+  #gate.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .gate-box {
+    background: #112215;
+    border: 1px solid #1e5e30;
+    border-radius: 14px;
+    padding: 44px 40px 40px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+  }
+  .gate-logo {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #3fd66a;
+    margin-bottom: 24px;
+  }
+  .gate-logo span { color: #7fa888; font-weight: 400; }
+  .gate-box h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .gate-box p {
+    font-size: 14px;
+    color: #7fa888;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .gate-box input[type="email"] {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: 1px solid #2a5c34;
+    background: #0c1a0e;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .gate-box input[type="email"]::placeholder { color: #4a7055; }
+  .gate-box input[type="email"]:focus { border-color: #3fd66a; }
+  .gate-box button {
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #3fd66a;
+    color: #0c1a0e;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .gate-box button:hover { background: #2fc45a; }
+  .gate-error {
+    font-size: 13px;
+    color: #e06060;
+    margin-top: 8px;
+    min-height: 18px;
+  }
+  .gate-fine {
+    font-size: 11.5px;
+    color: #4a7055;
+    margin-top: 16px;
+    line-height: 1.55;
+  }
+</style>
+</head>
+<body>
+
+<!-- EMAIL GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-logo">frank green <span>×</span> Shopify B2B</div>
+    <h2>Your B2B setup guide is ready</h2>
+    <p>Enter your email to access the step-by-step guide and September launch plan prepared for your team.</p>
+    <input type="email" id="gate-email" placeholder="your@email.com" autocomplete="email" />
+    <button onclick="unlockGuide()">Access guide</button>
+    <div class="gate-error" id="gate-error"></div>
+    <p class="gate-fine">Prepared by Austin Sonnen-Coote, Shopify Plus</p>
+  </div>
+</div>
+
+<header>
+  <div class="tag">Shopify B2B</div>
+  <h1>frank green × Shopify B2B<br><span>Setup Guide</span></h1>
+  <p>Step-by-step instructions to get the B2B store live by September. Follow in order — each step builds on the last.</p>
+</header>
+
+<div class="page">
+
+  <!-- ── TIMELINE ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Launch Timeline</div>
+      <h2>September go-live — working backwards</h2>
+      <p>DTC migration wraps in June. July and August are the main build months, front-end heavy. US launches first, then AU and UK.</p>
+    </div>
+    <div class="card-body">
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot now"></div>
+          <div class="tl-month">June 2026</div>
+          <div class="tl-title">Foundation <span class="tl-badge badge-backend">Back end</span></div>
+          <ul class="tl-items">
+            <li>Spin up dev expansion store</li>
+            <li>Complete DTC migration</li>
+            <li>Working session with Austin &amp; Rick — walk through company, catalog, and market setup</li>
+            <li>Build 2–3 test companies and catalogs manually to get familiar with the structure</li>
+            <li>Confirm with wholesale team: which SKUs are in scope for launch?</li>
+            <li>Confirm with dev team: Celigo B2B connector scope (company sync, payment terms)</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-month">July 2026</div>
+          <div class="tl-title">Build — back end complete, front end begins <span class="tl-badge badge-frontend">Front end</span></div>
+          <ul class="tl-items">
+            <li><strong>Back end (first two weeks):</strong> Build all markets (Wholesale AU, US, UK, Corporate &amp; Custom), create all catalog tiers, configure payment terms, set up Shopify Forms sign-up, enable new customer accounts, configure Shopify Payments on B2B store</li>
+            <li><strong>Bulk import:</strong> Import existing wholesale accounts via Matrixify once catalogs and markets are ready</li>
+            <li><strong>Front end (second two weeks):</strong> Customise the storefront per market in the theme editor — navigation, hero, product pages, quick-buy layout. Wick Creative to support where needed</li>
+            <li>Set up draft order flow for Corporate &amp; Custom channel</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-month">August 2026</div>
+          <div class="tl-title">Front end + testing <span class="tl-badge badge-frontend">Front end</span></div>
+          <ul class="tl-items">
+            <li><strong>Front end refinement:</strong> Final theme work, mobile QA, storefront polish across all markets</li>
+            <li><strong>Closed beta:</strong> Invite 3–5 existing US wholesale partners to test end-to-end — sign-up form → approval → login → catalog → checkout → NetSuite sync</li>
+            <li>Rep-assisted ordering tested with the sales team</li>
+            <li>Resolve any Celigo B2B connector issues</li>
+            <li>Internal training — wholesale team walkthrough</li>
+            <li>Prep launch comms for existing wholesale partners</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot launch"></div>
+          <div class="tl-month">September 2026</div>
+          <div class="tl-title">Go live <span class="tl-badge badge-launch">Launch</span></div>
+          <ul class="tl-items">
+            <li><strong>Week 1–2:</strong> US Wholesale market live — lowest risk market to launch first, all accounts migrated, sign-up form active</li>
+            <li><strong>Week 3–4:</strong> AU and UK Wholesale markets live</li>
+            <li>Corporate &amp; Custom channel live across all regions (centrally managed from AU)</li>
+            <li><strong>Hard cutoff for structural changes: mid-October.</strong> After that, only catalog updates and new company setups ahead of Q4.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 1</div>
+      <h2>Create a development store</h2>
+      <p>Build and test in a free sandbox before touching production. Dev stores on Plus are unlimited and don't count toward your production store limit.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Go to your Shopify admin</h3>
+          <p>Open the store switcher in the top-left corner of your admin and click <strong>Create store</strong>.</p>
+          <div class="lbl">Your Shopify Admin</div>
+          <div class="url"><a href="https://admin.shopify.com" target="_blank">https://admin.shopify.com</a></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Select Development as the store type</h3>
+          <p>Name it something clear like <em>frank-green-b2b-dev</em>. This store is your sandbox — everything in this guide should be built and tested here before going anywhere near production.</p>
+          <div class="lbl">Help — Development Stores</div>
+          <div class="url"><a href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/add-expansion-stores" target="_blank">https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/add-expansion-stores</a></div>
+        </div>
+      </div>
+
+      <div class="note"><strong>Production limit:</strong> You currently have 14 Shopify stores, and Plus includes 10 production stores. Dev/staging stores don't count toward this. Austin has flagged this to your CSM Sophie to review.</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 2 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 2</div>
+      <h2>Create your first Company and Location</h2>
+      <p>Every B2B account is a Company. Each Company has one or more Locations — a physical office, store, or region. Pricing, catalogs, and payment terms are set at the Location level.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Go to Customers → Companies</h3>
+          <div class="lbl">Admin Path (replace [store] with your store name)</div>
+          <div class="url">https://admin.shopify.com/store/<strong>[store]</strong>/companies</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Click Add company</h3>
+          <p>Enter the company name (e.g. "David Jones"). Add a Location (e.g. "David Jones — Sydney CBD") with the shipping address. At each location, set:</p>
+          <ul>
+            <li>Payment terms — Net 30, Net 60, or pay-now</li>
+            <li>Catalog assignment (after Step 3)</li>
+            <li>Market assignment (after Step 4)</li>
+            <li>Assigned sales rep</li>
+            <li>Order submission mode — draft (rep reviews first) or direct</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Add a buyer contact</h3>
+          <p>Enter the buyer's email address. Shopify sends them a passwordless login invite — no password required, just an email code. Test the login yourself before onboarding real accounts.</p>
+        </div>
+      </div>
+
+      <div class="lbl">Help — B2B Companies</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/b2b/companies" target="_blank">https://help.shopify.com/en/manual/b2b/companies</a></div>
+
+      <div class="tip"><strong>Start small:</strong> Create 2–3 test companies manually to get comfortable. Once you understand the structure, use Matrixify (Step 7) to import all your existing wholesale accounts in bulk.</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 3 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 3</div>
+      <h2>Create a Catalog</h2>
+      <p>Catalogs control which products a buyer sees and what they pay. Create one per pricing tier, then assign it to the relevant locations. Customers with multiple catalogs assigned always see the lowest applicable price.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Go to Products → Catalogs</h3>
+          <div class="lbl">Admin Path</div>
+          <div class="url">https://admin.shopify.com/store/<strong>[store]</strong>/catalogs</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Click Create catalog and configure it</h3>
+          <ul>
+            <li><strong>Name:</strong> Use something descriptive — "AU Wholesale Tier 1", "US Retail Partners", "Corporate & Custom"</li>
+            <li><strong>Products:</strong> Filter by tag to include only B2B-specific SKUs (e.g. tag all wholesale bulk packs as <em>b2b</em>)</li>
+            <li><strong>Pricing:</strong> Set a blanket % discount off DTC price, or override prices per product — or both</li>
+            <li><strong>Volume pricing:</strong> Add quantity breaks per product (e.g. buy 12+, price drops)</li>
+          </ul>
+          <div class="note" style="margin-top:8px;"><strong>Payment terms are not set in catalogs.</strong> They're configured per Company Location (Step 2). Catalogs only control product access and pricing.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Assign the catalog to a location</h3>
+          <p>Go to Customers → Companies → select the company → open the Location → scroll to <strong>Catalog</strong> → assign it. That buyer now sees those products and prices when they log in.</p>
+        </div>
+      </div>
+
+      <div class="lbl">Help — B2B Catalogs</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/b2b/catalogs" target="_blank">https://help.shopify.com/en/manual/b2b/catalogs</a></div>
+
+      <div class="tip"><strong>Promotions:</strong> For time-limited discounts, create a separate "promo" catalog for just those products and layer it on top. Remove it when the promo ends — pricing reverts automatically without touching any account's base catalog.</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 4 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 4</div>
+      <h2>Create B2B Markets</h2>
+      <p>Markets let different types of buyers see a different version of your store — different products, different navigation, different look and feel. Create one per channel or region.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Go to Settings → Markets</h3>
+          <div class="lbl">Admin Path</div>
+          <div class="url">https://admin.shopify.com/store/<strong>[store]</strong>/markets</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Click Add market for each B2B segment</h3>
+          <p>Suggested markets for frank green:</p>
+          <ul>
+            <li>Wholesale AU</li>
+            <li>Wholesale US</li>
+            <li>Wholesale UK</li>
+            <li>Corporate &amp; Custom</li>
+          </ul>
+          <p style="margin-top:6px;">Set a subfolder or subdomain per market if you want a distinct URL (e.g. <em>frankgreen.com/wholesale-au</em>).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Assign locations to their market</h3>
+          <p>Edit each Company Location → set the <strong>Market</strong> field to the relevant B2B market. That buyer now sees the experience and catalog for their market when they log in.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-content">
+          <h3>Customise the storefront per market (July / August — front end phase)</h3>
+          <p>Go to <strong>Online Store → Themes → Customize</strong>. In the top-left dropdown inside the theme editor, select a B2B market. Any changes made here only apply to that market — different hero, simplified nav, no DTC-only promotions. DTC stays completely unchanged.</p>
+          <div class="lbl">Help — Theme customisation per market</div>
+          <div class="url"><a href="https://help.shopify.com/en/manual/online-store/themes/customizing-themes/markets" target="_blank">https://help.shopify.com/en/manual/online-store/themes/customizing-themes/markets</a></div>
+        </div>
+      </div>
+
+      <div class="lbl">Help — B2B Markets</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/b2b/markets" target="_blank">https://help.shopify.com/en/manual/b2b/markets</a></div>
+    </div>
+  </div>
+
+  <!-- ── STEP 5 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 5</div>
+      <h2>Install Shopify Forms for wholesale sign-up</h2>
+      <p>Shopify Forms is a free app. When a retailer fills in the form, they're created in your admin as a Company with status "ordering not approved" — your team reviews and approves them before they can access the portal. Replaces Jotform.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Install from the App Store</h3>
+          <div class="lbl">Shopify Forms</div>
+          <div class="url"><a href="https://apps.shopify.com/shopify-forms" target="_blank">https://apps.shopify.com/shopify-forms</a></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Create a Company contact form</h3>
+          <p>Open the app → <strong>Create form</strong> → select the B2B company form template. Customise fields to capture what you need — business name, ABN/EIN, contact name, role, address, estimated order volume.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Embed it or share a direct link</h3>
+          <ul>
+            <li><strong>Embed:</strong> Add to an "Apply for Wholesale" page on your Shopify store</li>
+            <li><strong>Direct link:</strong> Send to prospects directly. No need to make it public — useful for trade shows, outbound prospecting, or sending to accounts you want to onboard manually</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-content">
+          <h3>Approve submissions</h3>
+          <p>Go to <strong>Customers → Companies</strong>. New submissions appear as "ordering not approved." Click the company → <strong>Approve</strong> → assign their catalog and payment terms. They receive a login email immediately.</p>
+        </div>
+      </div>
+
+      <div class="lbl">Help — Shopify Forms</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/promoting-marketing/create-marketing/shopify-forms" target="_blank">https://help.shopify.com/en/manual/promoting-marketing/create-marketing/shopify-forms</a></div>
+    </div>
+  </div>
+
+  <!-- ── STEP 6 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 6</div>
+      <h2>Enable new Customer Accounts</h2>
+      <p>Shopify B2B requires the new customer accounts (passwordless login via email code). You're migrating from legacy accounts as part of the new DTC launch anyway — this is the same switch, just confirm it's enabled on the B2B store.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Go to Settings → Customer accounts</h3>
+          <div class="lbl">Admin Path</div>
+          <div class="url">https://admin.shopify.com/store/<strong>[store]</strong>/settings/customer-accounts</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Switch to New customer accounts if not already enabled</h3>
+          <p>If it says <strong>Legacy customer accounts</strong>, click to switch. Buyers log in with their email — Shopify sends a one-time code, they enter it, they're in. No password to reset or forget.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Brand the login page</h3>
+          <p>On the same settings page, upload the frank green logo and set the accent colour to match your brand. This is what buyers see when they log in.</p>
+        </div>
+      </div>
+
+      <div class="lbl">Help — New Customer Accounts</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts" target="_blank">https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts</a></div>
+      <div class="lbl">Help — Migrating from Legacy Accounts</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts/migrate" target="_blank">https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts/migrate</a></div>
+
+      <div class="note"><strong>For production:</strong> When you flip this on the main DTC store, existing customers with saved passwords will be prompted to use email code instead. Give them advance notice.</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 7 ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Step 7</div>
+      <h2>Bulk-import wholesale accounts with Matrixify</h2>
+      <p>Once catalogs and markets are set up, use Matrixify to import all your existing wholesale accounts from a spreadsheet or NetSuite export. Do not do this by hand.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-content">
+          <h3>Install Matrixify</h3>
+          <div class="lbl">Matrixify — App Store</div>
+          <div class="url"><a href="https://apps.shopify.com/excel-export-import" target="_blank">https://apps.shopify.com/excel-export-import</a></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-content">
+          <h3>Download the Companies import template</h3>
+          <p>Inside the app: <strong>Import → Companies → Download sample</strong>. Map your data to these columns:</p>
+          <ul>
+            <li>Company name</li>
+            <li>Location name + shipping address</li>
+            <li>Payment terms (e.g. "Net 30")</li>
+            <li>Buyer email</li>
+            <li>Catalog and market references — <strong>use the exact column header names from the Matrixify sample template</strong>, not generic labels. Their naming format is specific (e.g. "B2B: Company: Name")</li>
+            <li>Ordering approval status — set to "approved" for existing accounts you've already vetted</li>
+          </ul>
+          <div class="lbl">Matrixify Docs — Companies</div>
+          <div class="url"><a href="https://matrixify.app/documentation/companies/" target="_blank">https://matrixify.app/documentation/companies/</a></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-content">
+          <h3>Run the import in the dev store first</h3>
+          <p>Matrixify shows a preview before creating anything. Verify the output looks right, then run the same file in production.</p>
+        </div>
+      </div>
+
+      <div class="note"><strong>Coordinate with dev:</strong> Before running a large import, confirm the Celigo B2B connector isn't also auto-creating companies — you don't want duplicates from both systems.</div>
+      <div class="lbl">Matrixify — Full Docs</div>
+      <div class="url"><a href="https://matrixify.app/documentation/" target="_blank">https://matrixify.app/documentation/</a></div>
+    </div>
+  </div>
+
+  <!-- ── PAYMENTS ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Payments</div>
+      <h2>Why frank green should use Shopify Payments for B2B</h2>
+      <p>The DTC/Stripe decision doesn't need to block this. A new feature — business entities per market — lets you run Shopify Payments on the B2B market while DTC stays on Stripe. No conflict. Here's what it unlocks.</p>
+    </div>
+    <div class="card-body">
+
+      <table class="compare">
+        <tr>
+          <th>Feature</th>
+          <th>Shopify Payments</th>
+          <th>Stripe (third-party)</th>
+        </tr>
+        <tr>
+          <td>Vaulted corporate cards</td>
+          <td><span class="yes">✓ Yes</span> — buyers save card on file at their location</td>
+          <td><span class="no">✗ No</span> — Stripe doesn't integrate at the company/location level</td>
+        </tr>
+        <tr>
+          <td>Auto-charge on Net 30/60 due date</td>
+          <td><span class="yes">✓ Yes</span> — Shopify Flow charges the vaulted card automatically when terms come due</td>
+          <td><span class="no">✗ No</span> — Shopify can't initiate charges through a third-party gateway</td>
+        </tr>
+        <tr>
+          <td>ACH / bank transfer (US)</td>
+          <td><span class="yes">✓ Yes</span> — buyers pay by direct bank transfer at checkout</td>
+          <td><span class="no">✗ No</span> — not available via third-party gateways on Shopify</td>
+        </tr>
+        <tr>
+          <td>Invoice-based checkout</td>
+          <td><span class="yes">✓ Yes</span> — buyers confirm and pay against terms</td>
+          <td><span class="yes">✓ Yes</span> — draft orders work either way</td>
+        </tr>
+        <tr>
+          <td>Option to keep DTC on Stripe while using Shopify Payments for B2B</td>
+          <td><span class="yes">✓ Yes</span> — business entities per market lets you run Shopify Payments on the B2B market while DTC stays on Stripe. The two operate independently.</td>
+          <td><span class="no">✗ No</span> — staying on Stripe means B2B also stays on Stripe, and you lose all of the above features</td>
+        </tr>
+      </table>
+
+      <div style="margin-top: 18px;">
+        <div class="substep" style="margin:0;">
+          <p style="font-size:14px; color:#3d5240; line-height:1.65; margin-bottom:10px;"><strong style="color:#0c1a0e;">Why Stripe can't do this:</strong> Vaulted cards, auto-charge, and ACH require Shopify to manage the payment relationship end-to-end. Third-party gateways process transactions but don't give Shopify the ability to initiate a charge on a buyer's behalf at a future date. This is a technical architecture limitation, not a commercial choice.</p>
+          <p style="font-size:14px; color:#3d5240; line-height:1.65;"><strong style="color:#0c1a0e;">The right comparison for the internal conversation:</strong> It's not "Shopify Payments fee vs. Stripe fee." It's "current cost of chasing Net 30 payments manually, rep time spent on admin, and delayed cash collection vs. the marginal basis point difference." For most wholesale operations, the operational saving outweighs the fee gap significantly.</p>
+        </div>
+      </div>
+
+      <div class="lbl" style="margin-top:14px;">Help — Shopify Payments for B2B</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/b2b/payment-terms" target="_blank">https://help.shopify.com/en/manual/b2b/payment-terms</a></div>
+      <div class="lbl">Help — Business Entities per Market (B2B on Shopify Payments, DTC on Stripe)</div>
+      <div class="url"><a href="https://help.shopify.com/en/manual/payments/shopify-payments/business-entity" target="_blank">https://help.shopify.com/en/manual/payments/shopify-payments/business-entity</a></div>
+    </div>
+  </div>
+
+  <!-- ── QUICK REF ── -->
+  <div class="card">
+    <div class="card-head">
+      <div class="section-label">Reference</div>
+      <h2>All links</h2>
+    </div>
+    <div class="card-body">
+      <div class="ref-grid">
+        <div class="ref-item">
+          <div class="ref-name">B2B Overview</div>
+          <a href="https://help.shopify.com/en/manual/b2b" target="_blank">help.shopify.com/en/manual/b2b</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Companies</div>
+          <a href="https://help.shopify.com/en/manual/b2b/companies" target="_blank">help.shopify.com/en/manual/b2b/companies</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Catalogs</div>
+          <a href="https://help.shopify.com/en/manual/b2b/catalogs" target="_blank">help.shopify.com/en/manual/b2b/catalogs</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Markets (B2B)</div>
+          <a href="https://help.shopify.com/en/manual/b2b/markets" target="_blank">help.shopify.com/en/manual/b2b/markets</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Payment Terms</div>
+          <a href="https://help.shopify.com/en/manual/b2b/payment-terms" target="_blank">help.shopify.com/en/manual/b2b/payment-terms</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Shopify Forms</div>
+          <a href="https://apps.shopify.com/shopify-forms" target="_blank">apps.shopify.com/shopify-forms</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">New Customer Accounts</div>
+          <a href="https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts" target="_blank">help.shopify.com/…/new-customer-accounts</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Matrixify</div>
+          <a href="https://apps.shopify.com/excel-export-import" target="_blank">apps.shopify.com/excel-export-import</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Business Entities per Market</div>
+          <a href="https://help.shopify.com/en/manual/payments/shopify-payments/business-entity" target="_blank">help.shopify.com/…/business-entity</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Theme Customisation per Market</div>
+          <a href="https://help.shopify.com/en/manual/online-store/themes/customizing-themes/markets" target="_blank">help.shopify.com/…/customizing-themes/markets</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Shopify Flow (automation)</div>
+          <a href="https://help.shopify.com/en/manual/shopify-flow" target="_blank">help.shopify.com/en/manual/shopify-flow</a>
+        </div>
+        <div class="ref-item">
+          <div class="ref-name">Expansion Stores on Plus</div>
+          <a href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/add-expansion-stores" target="_blank">help.shopify.com/…/add-expansion-stores</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p style="color:#3fd66a; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px;">Questions before the working session?</p>
+  <p><strong>Austin Sonnen-Coote</strong> — B2B Account Executive, Shopify Plus</p>
+  <p><a href="mailto:austin.sonnencoote@shopify.com">austin.sonnencoote@shopify.com</a></p>
+</footer>
+
+<script>
+  (function() {
+    var seen = localStorage.getItem('fg_b2b_access');
+    if (seen) {
+      document.getElementById('gate').style.display = 'none';
+    }
+    document.getElementById('gate-email').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') unlockGuide();
+    });
+  })();
+
+  function unlockGuide() {
+    var email = document.getElementById('gate-email').value.trim();
+    var err = document.getElementById('gate-error');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      err.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    err.textContent = '';
+    localStorage.setItem('fg_b2b_access', email);
+    var gate = document.getElementById('gate');
+    gate.classList.add('hidden');
+    setTimeout(function() { gate.style.display = 'none'; }, 400);
+  }
+</script>
+</body>
+</html>
